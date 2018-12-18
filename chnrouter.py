@@ -8,7 +8,7 @@ import math
 url = "http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest"
 filename_tmp = "delegated-apnic-latest"
 chnroute_new = "chnroute.new"
-chnroute_old = "chnroute.old"
+chnroute_old = "chnroute"
 
 req = Request(url)
 req.add_header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
@@ -32,5 +32,21 @@ with open(chnroute_new, "w") as chn_file:
 
 ip_file.close()
 
+add_list = []
+del_list = []
+
+with open(chnroute_new) as file:
+    for line in file:
+        add_list.append(line.strip())
+
+with open(chnroute_old) as file:
+    for line in file:
+        del_list.append(line.strip())
+
+ipset_add = list(set(add_list).difference(set(del_list)))
+
+print(ipset_add)
+
+        
 
 
