@@ -47,6 +47,9 @@ ipset_add = list(set(add_list).difference(set(del_list)))
 
 print(ipset_add)
 
+for ip in ipset_add:
+    print("add ip to ip set and restart iptables")
+
         
 
 
